@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wizard2 - Digital Marketing Agency</title>
+  <style>
+    /* Global styles and reset */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary-color: #cdff65;
+      --dark-color: #111111;
+      --light-color: #f8f8f8;
+      --gray-color: #e5e5e5;
+      --text-dark: #222222;
+      --text-light: #666666;
+      --border-radius-sm: 8px;
+      --border-radius-md: 16px;
+      --border-radius-lg: 24px;
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: #e5e5e5;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    
+    /* Container styles */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background-color: white;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+      padding: 0 20px;
+    }
+    
+    /* Utility classes */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: var(--border-radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      border: none;
+      font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+      background-color: var(--dark-color);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #000;
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--dark-color);
+      color: var(--dark-color);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--dark-color);
+      color: white;
+    }
+    
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+      background-color: var(--primary-color);
+      padding: 5px 15px;
+      border-radius: var(--border-radius-sm);
+    }
+    
+    /* Header styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 0;
+    }
+    
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    
+    nav a:hover {
+      color: var(--primary-color);
+    }
+    
+    .cta-button {
+      padding: 8px 16px;
+      background-color: white;
+      border: 1px solid var(--text-dark);
+      border-radius: var(--border-radius-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .cta-button:hover {
+      background-color: var(--text-dark);
+      color: white;
+    }
+    
+    /* Hero section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 60px 0;
+      gap: 60px;
+    }
+    
+    .hero-content h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    
+    .hero-content p {
+      color: var(--text-light);
+      margin-bottom: 30px;
+      max-width: 450px;
+    }
+    
+    .hero-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .megaphone {
+      width: 250px;
+      height: 250px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .floating-icon {
+      position: absolute;
+      animation: float 3s ease-in-out infinite alternate;
+    }
+    
+    .floating-icon:nth-child(1) {
+      top: 20%;
+      left: 15%;
+      animation-delay: 0.5s;
+    }
+    
+    .floating-icon:nth-child(2) {
+      top: 10%;
+      right: 20%;
+      animation-delay: 1s;
+    }
+    
+    .floating-icon:nth-child(3) {
+      bottom: 15%;
+      right: 25%;
+      animation-delay: 1.5s;
+    }
+    
+    .floating-icon:nth-child(4) {
+      bottom: 25%;
+      left: 10%;
+      animation-delay: 2s;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+    }
+    
+    /* Logo section */
+    .clients {
+      padding: 40px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      filter: grayscale(1) opacity(0.7);
+    }
+    
+    .client-logo {
+      height: 24px;
+      transition: var(--transition);
+    }
+    
+    .client-logo:hover {
+      filter: grayscale(0) opacity(1);
+      transform: scale(1.05);
+    }
+    
+    /* Services section */
+    .services {
+      padding: 60px 0;
+    }
+    
+    .services-intro {
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    .service-card {
+      background-color: white;
+      border-radius: var(--border-radius-md);
+      padding: 30px;
+      border: 1px solid var(--gray-color);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .service-card.light {
+      background-color: white;
+      color: var(--text-dark);
+    }
+    
+    .service-card.dark {
+      background-color: var(--dark-color);
+      color: white;
+    }
+    
+    .service-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .service-card.light .service-title {
+      background-color: var(--primary-color);
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 20px;
+    }
+    
+    .service-card.dark .service-title {
+      background-color: #333;
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 20px;
+    }
+    
+    .service-card .illustration {
+      width: 100px;
+      height: 100px;
+      margin: 20px 0;
+    }
+    
+    .learn-more {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 20px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    
+    .learn-more-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--text-dark);
+      margin-right: 10px;
+    }
+    
+    .service-card.dark .learn-more-icon {
+      background-color: white;
+    }
+    
+    /* CTA section */
+    .cta-section {
+      padding: 40px;
+      background-color: var(--light-color);
+      border-radius: var(--border-radius-lg);
+      margin: 60px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-content {
+      max-width: 500px;
+    }
+    
+    .cta-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .cta-content p {
+      color: var(--text-light);
+      margin-bottom: 25px;
+    }
+    
+    .cta-image {
+      width: 200px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Case study section */
+    .case-studies {
+      padding: 60px 0;
+    }
+    
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .case-study-card {
+      background-color: var(--dark-color);
+      color: white;
+      border-radius: var(--border-radius-md);
+      padding: 30px;
+      transition: var(--transition);
+    }
+    
+    .case-study-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .case-study-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .case-study-card p {
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .case-study-card .learn-more {
+      color: var(--primary-color);
+    }
+    
+    /* Footer styles */
+    footer {
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+    
+    /* Mobile navigation */
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    
+    /* Media queries */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+      
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .services-grid, .case-studies-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .cta-content {
+        margin-bottom: 40px;
+      }
+      
+      .clients {
+        justify-content: center;
+      }
+      
+      .client-logo {
+        margin: 0 15px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      nav li {
+        margin: 10px 0;
+      }
+      
+      .mobile-nav-toggle {
+        display: block;
+      }
+      
+      header {
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" fill="black"/>
+          <path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Wizard2
+      </div>
+      
+      <nav>
+        <button class="mobile-nav-toggle" aria-label="Toggle menu">☰</button>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#case-studies">Use Cases</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </nav>
+      
+      <button class="cta-button">Request a quote</button>
+    </header>
+    
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Navigating the digital landscape for success</h1>
+        <p>Our digital marketing agency helps businesses reach their target audiences through effective services including SEO, PPC, social media marketing, and content creation.</p>
+        <a href="#consultation" class="btn btn-primary">Book a consultation</a>
+      </div>
+      
+      <div class="hero-image">
+        <svg class="megaphone" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" stroke="black" stroke-width="2"/>
+          <path d="M70 70L130 130" stroke="black" stroke-width="2"/>
+          <path d="M130 70L70 130" stroke="black" stroke-width="2"/>
+          <path d="M100 50V150" stroke="black" stroke-width="2"/>
+          <path d="M50 100H150" stroke="black" stroke-width="2"/>
+          <circle cx="100" cy="100" r="30" fill="#CDFF65"/>
+        </svg>
+        
+        <svg class="floating-icon" style="width: 40px; height: 40px;" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="#CDFF65"/>
+          <path d="M20 10V30" stroke="black" stroke-width="2"/>
+          <path d="M10 20H30" stroke="black" stroke-width="2"/>
+        </svg>
+        
+        <svg class="floating-icon" style="width: 40px; height: 40px;" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="black"/>
+          <path d="M15 15L25 25" stroke="white" stroke-width="2"/>
+          <path d="M25 15L15 25" stroke="white" stroke-width="2"/>
+        </svg>
+        
+        <svg class="floating-icon" style="width: 40px; height: 40px;" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="black"/>
+          <circle cx="20" cy="20" r="10" fill="#CDFF65"/>
+        </svg>
+        
+        <svg class="floating-icon" style="width: 40px; height: 40px;" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" fill="black"/>
+          <circle cx="20" cy="20" r="10" fill="white"/>
+        </svg>
+      </div>
+    </section>
+    
+    <section class="clients">
+      <img src="/api/placeholder/100/24" alt="Amazon" class="client-logo">
+      <img src="/api/placeholder/100/24" alt="Dribbble" class="client-logo">
+      <img src="/api/placeholder/100/24" alt="HubSpot" class="client-logo">
+      <img src="/api/placeholder/100/24" alt="Notion" class="client-logo">
+      <img src="/api/placeholder/100/24" alt="Netflix" class="client-logo">
+      <img src="/api/placeholder/100/24" alt="Zoom" class="client-logo">
+    </section>
+    
+    <section class="services" id="services">
+      <div class="section-title">Services</div>
+      <div class="services-intro">
+        <p>As our digital marketing agency, we offer a range of services to help businesses grow and succeed online. These services include:</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card light">
+          <div class="service-title">Search engine optimization</div>
+          
+          <svg class="illustration" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" stroke="black" stroke-width="2"/>
+            <path d="M40 40L60 60" stroke="black" stroke-width="2"/>
+            <path d="M60 40L40 60" stroke="black" stroke-width="2"/>
+          </svg>
+          
+          <a href="#" class="learn-more">
+            <div class="learn-more-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H13" stroke="#CDFF65" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 1L13 7L7 13" stroke="#CDFF65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            Learn more
+          </a>
+        </div>
+        
+        <div class="service-card dark">
+          <div class="service-title">Pay per click advertising</div>
+          
+          <svg class="illustration" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="60" height="40" stroke="white" stroke-width="2"/>
+            <path d="M50 60L60 70" stroke="white" stroke-width="2"/>
+          </svg>
+          
+          <a href="#" class="learn-more">
+            <div class="learn-more-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H13" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 1L13 7L7 13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            Learn more
+          </a>
+        </div>
+        
+        <div class="service-card dark">
+          <div class="service-title">Social media marketing</div>
+          
+          <svg class="illustration" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="20" height="20" stroke="white" stroke-width="2"/>
+            <rect x="60" y="20" width="20" height="20" stroke="white" stroke-width="2"/>
+            <rect x="20" y="60" width="20" height="20" stroke="white" stroke-width="2"/>
+            <rect x="60" y="60" width="20" height="20" stroke="white" stroke-width="2"/>
+          </svg>
+          
+          <a href="#" class="learn-more">
+            <div class="learn-more-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H13" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 1L13 7L7 13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            Learn more
+          </a>
+        </div>
+        
+        <div class="service-card light">
+          <div class="service-title">E-mail marketing</div>
+          
+          <svg class="illustration" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="30" width="60" height="40" stroke="black" stroke-width="2"/>
+            <path d="M20 30L50 50L80 30" stroke="black" stroke-width="2"/>
+          </svg>
+          
+          <a href="#" class="learn-more">
+            <div class="learn-more-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H13" stroke="#CDFF65" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 1L13 7L7 13" stroke="#CDFF65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            Learn more
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2>Let's make things happen</h2>
+        <p>Contact us today to learn more about how our digital marketing services can help your business grow and succeed in the competitive online landscape.</p>
+        <a href="#" class="btn btn-primary">Get your free proposal</a>
+      </div>
+      
+      <div class="cta-image">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" stroke="black" stroke-width="2"/>
+          <circle cx="70" cy="70" r="15" fill="black"/>
+          <circle cx="130" cy="70" r="15" fill="black"/>
+          <path d="M70 130C70 130 85 150 100 150C115 150 130 130 130 130" stroke="black" stroke-width="2"/>
+          <rect x="80" y="180" width="40" height="40" fill="#CDFF65"/>
+        </svg>
+      </div>
+    </section>
+    
+    <section class="case-studies" id="case-studies">
+      <div class="section-title">Case study</div>
+      <p>Explore Real-Life Examples of Our Proven Digital Marketing Success through Our Case Studies.</p>
+      
+      <div class="case-studies-grid">
+        <div class="case-study-card">
+          <div class="case-study-title">For a local restaurant, we implemented an SEO campaign that resulted in a 70% increase in organic traffic and a 25% increase in sales.</div>
+          <p>Result: 70% more organic traffic</p>
+          <a href="#" class="learn-more">Learn more <span style="margin-left: 5px;">→</span></a>
+        </div>
+        
+        <div class="case-study-card">
+          <div class="case-study-title">For a B2B software company, we created a PPC campaign that resulted in a 4:1 ROI, quickly generating qualified leads to fill their sales funnel.</div>
+          <p>Result: 4:1 ROI on ad spend</p>
+          <a href="#" class="learn-more">Learn more <span style="margin-left: 5px;">→</span></a>
+        </div>
+        
+        <div class="case-study-card">
+          <div class="case-study-title">For a fashion retailer, we created a social media marketing campaign that increased their brand awareness by 200% and generated a 50% increase in conversions.</div>
+          <p>Result: 200% increase in brand awareness</p>
+          <a href="#" class="learn-more">Learn more <span style="margin-left: 5px;">→</span></a>
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <p>&copy; 2025 Wizard2. All rights reserved.</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Mobile navigation toggle
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const navList = document.querySelector('nav ul');
+    
+    mobileNavToggle.addEventListener('click', function() {
+      navList.classList.toggle('active');
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          navList.classList.remove('active');
+        }
+      });
+    });
+    
+    // Reveal animations on scroll
+    const revealElements = document.querySelectorAll('.service-card, .case-study-card, .cta-section');
+    
+    function checkReveal() {
+      const windowHeight = window.innerHeight;
+      
+      revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        } else {
+          element.style.opacity = '0';
+          element.style.transform = 'translateY(20px)';
+        }
+      });
+    }
+    
+    // Set initial styles for animation
+    revealElements.forEach(element => {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(20px)';
+      element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // Trigger reveal check on page load and scroll
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('load', checkReveal);
+    
+    // Interactive buttons
+    const buttons = document.querySelectorAll('.btn, .cta-button');
+    
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-3px)';
+        button.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0)';
+        button.style.boxShadow = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
